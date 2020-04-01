@@ -4,7 +4,7 @@ insert into departments values ('2','LO');
 insert into departments values ('3','EL');
 insert into departments values ('4','PH');
 insert into departments values ('5','RH');
-insert into departments values ('6','RS');
+insert into departments values ('6',,'RS');
 insert into departments values ('7','SE');
 
 
