@@ -8,5 +8,5 @@ while IFS= read -r line
 do
 varrr="${varrr}$line"
 done < "$input"
-mysql -uroot -pHGKO$.xu1234 -Bse "$varrr"
+mysql -uroot -ppixid -Bse "$varrr"
 done
