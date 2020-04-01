@@ -5,7 +5,7 @@ IFS=':'
 read -ra ADDR <<< "$str"
 docker_mysql_port=${ADDR[1]}
 echo ${docker_mysql_port}
-mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 -Bse "drop database if exists db5;create database db5;use db5;"
+mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 
 
 
 input="C:\Users\Admin\Desktop\test\logfile.txt"
