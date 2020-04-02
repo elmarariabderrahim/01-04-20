@@ -5,7 +5,7 @@ IFS=':'
 read -ra ADDR <<< "$str"
 docker_mysql_port=${ADDR[1]}
 echo ${docker_mysql_port}
-mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 -Bse "drop database if exists db5;create database db5;use db5;"
+mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 
 
 
 input="C:\Users\Admin\Desktop\test\logfile.txt"
@@ -30,10 +30,10 @@ for f in sql_scripts/*; do
 
 
  if [ "$?" -eq 0 ]; then 
- echo "+++++"
+ echo " le script $script_name est passer par succes"
 	mysql -uroot -ppixid123 -Bse "use db5;insert into scripts (script_name,script_state) values('$script_name','succes');"
  else
- echo "-----"
+ echo " le script ${script_name} a échoué"
 	mysql -uroot -ppixid123 -Bse "use db5;insert into scripts (script_name,script_state) values('$script_name','failed');"
  fi
 done
