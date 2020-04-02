@@ -12,10 +12,15 @@ pipeline {
 		    
             }
         }
+	    boolean scripts_succes = true
         stage('Import_schema_apply_scripts') {
             steps {
-		   
-        	   bat 'sh -c ./add_to_container.sh'            }
+			   try{
+				 bat 'sh -c ./add_to_container.sh'
+			   }catch (Exception e){
+				scripts_succes = false
+			   }
+        	  }
         }
         stage('Apply_to_db') {
             steps {
