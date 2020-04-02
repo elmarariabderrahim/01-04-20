@@ -14,12 +14,13 @@ pipeline {
         }
 	    boolean scripts_succes = true
         stage('Import_schema_apply_scripts') {
-            
-			   try{
-				 bat 'sh -c ./add_to_container.sh'
-			   }catch (Exception e){
-				scripts_succes = false
-			   }
+            steps {
+			  
+				def scripts_succes = bat 'sh -c ./add_to_container.sh'
+			         if (testResult == 'Failed') {
+					error "test failed"
+				    }
+	          }
         	  
         }
         stage('Apply_to_db') {
