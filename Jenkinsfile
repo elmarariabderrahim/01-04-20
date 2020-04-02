@@ -16,11 +16,8 @@ pipeline {
         stage('Import_schema_apply_scripts') {
             steps {
 		    step{
-				def scripts_succes = bat 'sh -c ./add_to_container.sh'
-			         if (scripts_succes  == 'Failed') {
-					error "test failed"
-				    }
-		    }
+		             bat 'sh -c ./add_to_container.sh'
+			
 	          }
         	  
         }
