@@ -188,7 +188,7 @@ class Tools {
 
 		    for(String db:getDatabaseName()){
 		    	if(!db.equals('information_schema') && !db.equals('mysql')&& !db.equals('performance_schema')&& !db.equals('sys') ) {
-		  	      println "CREATE DATABASE IF NOT EXISTS"+db+";"
+		  	      println "CREATE DATABASE IF NOT EXISTS "+db+";"
 		  		}
 		   }
 		  for(String st:queryWithoutConstraints(databaseName)) {
