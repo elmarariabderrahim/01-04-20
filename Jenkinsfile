@@ -12,7 +12,7 @@ pipeline {
 		    
             }
         }
-	    boolean scripts_succes = true
+	   
         stage('Import_schema_apply_scripts') {
             steps {
 			  
