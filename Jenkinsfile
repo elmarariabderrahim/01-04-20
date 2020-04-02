@@ -17,7 +17,7 @@ pipeline {
             steps {
 		    step{
 				def scripts_succes = bat 'sh -c ./add_to_container.sh'
-			         if (testResult == 'Failed') {
+			         if (scripts_succes  == 'Failed') {
 					error "test failed"
 				    }
 		    }
