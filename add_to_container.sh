@@ -8,7 +8,7 @@ echo ${docker_mysql_port}
 mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 
 
 
-input="C:\Users\Admin\Desktop\test\logfile.txt"
+input="C:\Program Files (x86)\Jenkins\workspace\pipeline_v1"
 var=""
 while IFS= read -r line
 do
