@@ -15,19 +15,20 @@ pipeline {
 	   
         stage('Import_schema_apply_scripts') {
             steps {
-			  
+		    step{
 				def scripts_succes = bat 'sh -c ./add_to_container.sh'
 			         if (testResult == 'Failed') {
 					error "test failed"
 				    }
+		    }
 	          }
         	  
         }
         stage('Apply_to_db') {
             steps {
-		    if(scripts_succes){
+		    
         	    bat 'sh -c ./apply_scripts_db.sh'  
-		    }
+		    
             }
         }
     }
