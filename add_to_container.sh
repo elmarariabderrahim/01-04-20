@@ -15,7 +15,7 @@ mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123
 path=$(pwd)
 
 # import database schema 
-input="$path/out.txt"
+input="$path/output.sql"
 var=""
 while IFS= read -r line
 do
