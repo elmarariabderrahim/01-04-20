@@ -10,7 +10,7 @@ read -ra ADDR <<< "$str"
 docker_mysql_port=${ADDR[1]}
 echo ${docker_mysql_port}
 # acces to docker image 'test-mysql'
-# mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 -Bse "CREATE DATABASE IF NOT EXISTS db5;"
+mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 
 
 path=$(pwd)
 
