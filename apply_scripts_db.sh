@@ -1,7 +1,8 @@
 	
 #!/bin/bash
-	
-results=( $( mysql --batch mysql -u root -ppixid123 -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='null';"  ) )
+export username=$1
+export password=$2	
+results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='null';"  ) )
 
 
  IFS=':'
@@ -14,15 +15,15 @@ for f in sql_scripts/*; do
 			do
 				varrr="${varrr}$line"
 			done < "$input"
-	    	mysql -uroot -ppixid123 -Bse "$varrr"
+	    	mysql -u$username -p$password -Bse "$varrr"
 		    if [ "$?" -eq 0 ]; then 
 		    	echo " le script $script_name est passer avec succes"
-				mysql -uroot -ppixid123 -Bse "use db5;update scripts set script_validation ='valid' where script_name='$script_name';"
+				mysql -u$username -p$password -Bse "use db5;update scripts set script_validation ='valid' where script_name='$script_name';"
 				
 			else
 				echo " le script ${script_name} a échoué"
 												 
-				mysql -uroot -ppixid123 -Bse "use db5;update scripts set script_validation ='invalid' where script_name='$script_name';"
+				mysql -u$username -p$password -Bse "use db5;update scripts set script_validation ='invalid' where script_name='$script_name';"
 			fi
 	else
 		echo "il n'exixt pas de nv script ou le script n'est valider dans l'image docker "
