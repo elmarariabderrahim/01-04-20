@@ -9,7 +9,7 @@ results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select
 for f in sql_scripts/*; do
 	input="./$f"
 	script_name=$(echo $f| cut -d'/' -f 2)
-	if [[  ${results[*]} =~ "$script_name" ]]; then 
+	if [[ ! ${results[*]} =~ "$script_name" ]]; then 
 			varrr=""
 			while IFS= read -r line
 			do
