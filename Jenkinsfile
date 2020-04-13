@@ -22,13 +22,35 @@ pipeline {
         }
         stage('Import_schema_apply_scripts') {
             steps {
+		    withCredentials([
+					usernamePassword(
+						credentialsId: '0467c09c-9a30-4e9f-bdc9-6126fd2482d4', 
+						usernameVariable: 'USERNAME',
+						passwordVariable: 'PASSWORD'
+						
+						
+					)
+			]){
+        	     bat 'sh -c ./add_to_container.sh ${USERNAME}  ${PASSWORD}' 
+		    }
 		   
-        	   bat 'sh -c ./add_to_container.sh'            }
+        	              }
         }
         stage('Apply_to_db') {
             steps {
+		    withCredentials([
+					usernamePassword(
+						credentialsId: '0467c09c-9a30-4e9f-bdc9-6126fd2482d4', 
+						usernameVariable: 'USERNAME',
+						passwordVariable: 'PASSWORD'
+						
+						
+					)
+			]){
+        	    bat 'sh -c ./apply_scripts_db.sh ${USERNAME}  ${PASSWORD}' 
+		    }
 		    
-        	    bat 'sh -c ./apply_scripts_db.sh'  
+        	     
             }
         }
     }
