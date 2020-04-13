@@ -23,7 +23,7 @@ pipeline {
 						
 					)
 			]){
-        	     bat 'sh -c ./add_to_container.sh ${USERNAME}  ${PASSWORD}'
+        	     bat "sh  ./add_to_container.sh ${USERNAME}  ${PASSWORD}"
 		    }
 		    
         	      
@@ -42,7 +42,7 @@ pipeline {
 						
 					)
 			]){
-        	    bat 'sh -c ./apply_scripts_db.sh ${USERNAME}  ${PASSWORD}' 
+        	    bat "sh  ./apply_scripts_db.sh ${USERNAME}  ${PASSWORD}" 
 		    }
 		    
         	     
