@@ -6,7 +6,15 @@ pipeline {
     stages {
         stage('generate_DDL') {
             steps {
-		    withCredentials([
+		    
+        	     bat 'sh -c ./exp_script.sh '
+		    
+		    
+            }
+        }
+        stage('Import_schema_apply_scripts') {
+            steps {
+		   	withCredentials([
 					usernamePassword(
 						credentialsId: '0467c09c-9a30-4e9f-bdc9-6126fd2482d4', 
 						usernameVariable: 'USERNAME',
@@ -15,15 +23,10 @@ pipeline {
 						
 					)
 			]){
-        	     bat 'sh -c ./exp_script.sh ${USERNAME}  ${PASSWORD}'
+        	     bat 'sh -c ./add_to_container.sh ${USERNAME}  ${PASSWORD}'
 		    }
 		    
-            }
-        }
-        stage('Import_schema_apply_scripts') {
-            steps {
-		   
-        	     bat 'sh -c ./add_to_container.sh ${USERNAME}  ${PASSWORD}' 
+        	      
 		    
 		   
         	              }
