@@ -6,9 +6,17 @@ pipeline {
     stages {
         stage('generate_DDL') {
             steps {
-		    
-        	     bat 'sh -c ./exp_script.sh'
-		   
+		    withCredentials([
+					usernamePassword(
+						credentialsId: '0467c09c-9a30-4e9f-bdc9-6126fd2482d4', 
+						usernameVariable: 'USERNAME',
+						passwordVariable: 'PASSWORD'
+						
+						
+					)
+			]){
+        	     bat 'sh -c ./exp_script.sh ${USERNAME}  ${PASSWORD}'
+		    }
 		    
             }
         }
