@@ -1,7 +1,8 @@
 	
 #!/bin/bash
 export username=$1
-export password=$2	
+export password=$2
+echo "$password"
 results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes';"  ) )
 results_of_failed_scripts=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='failed';"  ) )
 
