@@ -78,3 +78,4 @@ for f in sql_scripts/*; do
 							else
 									echo "le script $script_name est deja tester avec succes "
 							fi
+done
