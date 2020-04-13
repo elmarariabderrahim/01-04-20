@@ -2,14 +2,14 @@
 #!/bin/bash
 export username=$1
 export password=$2	
-results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='null';"  ) )
+results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='null' or script_validation='invalid' and script_state='succes';"  ) )
 
 
  IFS=':'
 for f in sql_scripts/*; do
 	input="./$f"
 	script_name=$(echo $f| cut -d'/' -f 2)
-	if [[ ! ${results[*]} =~ "$script_name" ]]; then 
+	if [[  ${results[*]} =~ "$script_name" ]]; then 
 			varrr=""
 			while IFS= read -r line
 			do
