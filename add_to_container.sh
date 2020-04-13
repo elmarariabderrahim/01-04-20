@@ -1,8 +1,9 @@
 	
 #!/bin/bash
-	
-results=( $( mysql --batch mysql -u root -ppixid123 -N -e "use db5; select script_name from scripts where script_state='succes';"  ) )
-results_of_failed_scripts=( $( mysql --batch mysql -u root -ppixid123 -N -e "use db5; select script_name from scripts where script_state='failed';"  ) )
+export username=$1
+export password=$2	
+results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes';"  ) )
+results_of_failed_scripts=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='failed';"  ) )
 
 str=$(docker port test-mysql)
 IFS=':'
@@ -10,7 +11,7 @@ read -ra ADDR <<< "$str"
 docker_mysql_port=${ADDR[1]}
 echo ${docker_mysql_port}
 # acces to docker image 'test-mysql'
-mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 
+mysql -P $docker_mysql_port --protocol=tcp -u $username -p$password 
 
 path=$(pwd)
 
@@ -21,7 +22,7 @@ while IFS= read -r line
 do
 var="${var}$line"
 done < "$input"
-mysql -P $docker_mysql_port --protocol=tcp -uroot -ppixid123 -Bse "$var"
+mysql -P $docker_mysql_port --protocol=tcp -u$username -p$password -Bse "$var"
 
 flag=""
 for f in sql_scripts/*; do
@@ -53,17 +54,17 @@ for f in sql_scripts/*; do
 									done < "$input" 
 
 									
-									mysql -P $docker_mysql_port --protocol=tcp -uroot -ppixid123 -Bse "$varrr" 
+									mysql -P $docker_mysql_port --protocol=tcp -u$username -p$password -Bse "$varrr" 
 
 
 									if [ "$?" -eq 0 ]; then
 											if [[ ${results_of_failed_scripts[*]} =~ "$script_name" ]] 
 											then
-												mysql -uroot -ppixid123 -Bse "use db5;update scripts set  script_state = 'succes' where script_name='$script_name';"
+												mysql -u$username -p$password -Bse "use db5;update scripts set  script_state = 'succes' where script_name='$script_name';"
 												echo " le script $script_name est passer avec succes"
 											else
 												echo " le script $script_name est passer avec succes"
-												mysql -uroot -ppixid123 -Bse "use db5;insert into scripts (script_name,script_state) values('$script_name','succes');"
+												mysql -u$username -p$password -Bse "use db5;insert into scripts (script_name,script_state) values('$script_name','succes');"
 											fi
 									else
 											if [[ ${results_of_failed_scripts[*]} =~ "$script_name" ]] 
@@ -72,7 +73,7 @@ for f in sql_scripts/*; do
 											else
 											echo " le script ${script_name} a échoué"
 											 
-											mysql -uroot -ppixid123 -Bse "use db5;insert into scripts (script_name,script_state) values('$script_name','failed');"
+											mysql -u$username -p$password -Bse "use db5;insert into scripts (script_name,script_state) values('$script_name','failed');"
 											fi
 									fi 
 							else
