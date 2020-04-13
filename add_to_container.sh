@@ -15,7 +15,7 @@ mysql -P $docker_mysql_port --protocol=tcp -u root -ppixid123 -Bse "CREATE DATAB
 path=$(pwd)
 
 # import database schema 
-input="$path/logfile.txt"
+input="$path/out.txt"
 var=""
 while IFS= read -r line
 do
