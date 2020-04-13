@@ -8,6 +8,6 @@ insert into departments values ('6','RS');
 insert into departments values ('7','SE');
 
 
-insert into employees values (1,'2020-01-01','med','lhkim','M',,'2020-01-01');
+insert into employees values (1,'2020-01-01','med','lhkim','M','2020-01-01');
 insert into employees values (2,'2020-01-01','med','lhkim','M','2020-01-01');
 insert into employees values (3,'2020-01-01','med','lhkim','M','2020-01-01');
