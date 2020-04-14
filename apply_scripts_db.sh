@@ -2,18 +2,14 @@
 #!/bin/bash
 export username=$1
 export password=$2	
-results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes'  ;"  ) )
-results_succes=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where  script_state='succes' and script_validation='valid' ;"  ) )
+results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='null' ;"  ) )
 
 
  IFS=':'
 for f in sql_scripts/*; do
 	input="./$f"
 	script_name=$(echo $f| cut -d'/' -f 2)
-	if [[   ${results_succes[*]} =~ "$script_name" ]] 
-	then 
-	echo "le $script_name script est deja test dans la base et dans docker"
-	else
+	
 	if [[ !  ${results[*]} =~ "$script_name" ]]
 	then 
 			varrr=""
@@ -33,7 +29,7 @@ for f in sql_scripts/*; do
 			fi
 	else
 		echo "il n'exixt pas de nv script ou le script n'est valider dans l'image docker "
-	fi
+	
 	fi
 done
 
