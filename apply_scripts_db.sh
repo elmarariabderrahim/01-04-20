@@ -33,10 +33,11 @@
 # 	fi
 # done
 
-
-results=( $( mysql --batch mysql -u root -ppixid123 -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='valid';"  ) )
+export username=$1
+export password=$2
+results=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='valid';"  ) )
 # results_of_failed_scripts=( $( mysql --batch mysql -u root -ppixid123 -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='invalid';"  ) )
-results_of_succes_scripts=( $( mysql --batch mysql -u root -ppixid123 -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='invalid';"  ) )
+results_of_succes_scripts=( $( mysql --batch mysql -u $username -p$password -N -e "use db5; select script_name from scripts where script_state='succes' and script_validation='invalid';"  ) )
 
 
 
