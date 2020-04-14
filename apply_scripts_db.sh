@@ -10,7 +10,7 @@ results_succes=( $( mysql --batch mysql -u $username -p$password -N -e "use db5;
 for f in sql_scripts/*; do
 	input="./$f"
 	script_name=$(echo $f| cut -d'/' -f 2)
-	if [[ !  ${results_succes[*]} =~ "$script_name" ]] 
+	if [[   ${results_succes[*]} =~ "$script_name" ]] 
 	then 
 	echo "le script est deja test dans la base et dans docker"
 	else
