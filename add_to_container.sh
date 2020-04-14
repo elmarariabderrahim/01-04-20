@@ -70,7 +70,7 @@ for f in sql_scripts/*; do
 									else
 											if [[ ${results_of_failed_scripts[*]} =~ "$script_name" ]] 
 											then
-											echo " vous n'avais pas corriger ce fichier"
+											echo " le script $script_name n'est pas corriger"
 											else
 											echo " le script ${script_name} a échoué"
 											 
