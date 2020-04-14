@@ -12,7 +12,7 @@ for f in sql_scripts/*; do
 	script_name=$(echo $f| cut -d'/' -f 2)
 	if [[   ${results_succes[*]} =~ "$script_name" ]] 
 	then 
-	echo "le script est deja test dans la base et dans docker"
+	echo "le $script_name script est deja test dans la base et dans docker"
 	else
 	if [[ !  ${results[*]} =~ "$script_name" ]]
 	then 
